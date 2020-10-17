@@ -51,6 +51,70 @@ class GedcomParser {
     return _root;
   }
 
+  /// Returns a map of elements for a given [RootElement] by its pointer
+  ///
+  /// Only elements identified by a pointer are listed in the dictionary.
+  /// The keys for the dictionary are the pointers.
+  Map<String, GedcomElement> getElementsMap(RootElement element) {
+    final map = <String, GedcomElement>{};
+    for (final child in element.children) {
+      if (child.pointer != null && child.pointer.isNotEmpty) {
+        map[child.pointer] = child;
+      }
+    }
+    return map;
+  }
+
+  /// Returns a list containing all elements from within the GEDCOM file
+  ///
+  /// By default elements are in the same order as they appeared in the file.
+  List<GedcomElement> getElementsList(RootElement element) {
+    final list = <GedcomElement>[];
+    for (var element in element.children) {
+      list.addAll(_buildList(element));
+    }
+    return list;
+  }
+
+  /// Return family elements listed for an individual
+  List<FamilyElement> getFamilies(
+    IndividualElement individual,
+    Map<String, GedcomElement> elementsMap, {
+    FamilyRelation relation = FamilyRelation.spouse,
+  }) {
+    var tag = GEDCOM_TAG_FAMILY_SPOUSE;
+    switch (relation) {
+      case FamilyRelation.spouse:
+        tag = GEDCOM_TAG_FAMILY_SPOUSE;
+        break;
+      case FamilyRelation.child:
+        tag = GEDCOM_TAG_FAMILY_CHILD;
+        break;
+      case FamilyRelation.other:
+        tag = GEDCOM_TAG_FAMILY;
+        break;
+    }
+
+    final families = <FamilyElement>[];
+    for (final child in individual.children) {
+      final isFamily = child.tag == tag;
+      if (isFamily) {
+        families.add(elementsMap[child.value]);
+      }
+    }
+    return families;
+  }
+
+  /// Recursively add elements to a list containing elements
+  List<GedcomElement> _buildList(GedcomElement element) {
+    final list = <GedcomElement>[];
+    list.add(element);
+    for (final child in element.children) {
+      list.addAll(_buildList(child));
+    }
+    return list;
+  }
+
   /// Parses single line of GEDCOM input
   ///
   /// Returns resulting [GedcomElement]

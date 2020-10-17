@@ -57,6 +57,17 @@ const GEDCOM_TAG_DATE = 'DATE';
 /// The event when mortal life terminates.
 const GEDCOM_TAG_DEATH = 'DEAT';
 
+/// Enum describing type of family relation
+///
+/// - [spouse] corresponds to [GEDCOM_TAG_FAMILY_SPOUSE],
+/// - [child] corresponds to [GEDCOM_TAG_FAMILY_CHILD],
+/// - [other] corresponds to [GEDCOM_TAG_FAMILY]
+enum FamilyRelation {
+  spouse,
+  child,
+  other,
+}
+
 /// Identifies a legal, common law, or other customary relationship
 /// of man and woman and their children, if any, or a family created
 /// by virtue of the birth of a child to its biological father and mother.

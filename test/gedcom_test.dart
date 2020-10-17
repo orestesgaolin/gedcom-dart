@@ -19,6 +19,43 @@ void main() {
     expect(root.children[63], isA<ObjectElement>());
     expect(root.children[63].children[0].tag, equals('TITL'));
   });
+
+  test('returns list of elements', () {
+    final parser = GedcomParser();
+    final root = parser.parse(tortureTest1);
+    final list = parser.getElementsList(root);
+    expect(list.length, equals(2161));
+  });
+
+  test('returns map of elements by pointer', () {
+    final parser = GedcomParser();
+    final root = parser.parse(tortureTest1);
+    final map = parser.getElementsMap(root);
+    expect(map.entries.length, equals(63));
+    expect(map['@PERSON6@'], isA<IndividualElement>());
+  });
+
+  test('returns families of individual', () {
+    final parser = GedcomParser();
+    final root = parser.parse(tortureTest1);
+    final map = parser.getElementsMap(root);
+    final families1 = parser.getFamilies(map['@PERSON4@'], map);
+    final families2 = parser.getFamilies(map['@PERSON5@'], map);
+    final families3 = parser.getFamilies(map['@PERSON6@'], map);
+    expect(families1, isEmpty);
+    expect(families2.length, equals(1));
+    expect(families3.length, equals(1));
+  });
+
+  test('returns families of individual as child', () {
+    final parser = GedcomParser();
+    final root = parser.parse(tortureTest1);
+    final map = parser.getElementsMap(root);
+    final families1 = parser.getFamilies(map['@PERSON4@'], map,
+        relation: FamilyRelation.child);
+    expect(families1, isNotEmpty);
+    expect(families1.first.children.length, equals(24));
+  });
 }
 
 const testData = '''
