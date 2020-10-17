@@ -44,7 +44,7 @@ class GedcomParser {
       ..removeWhere((element) => element.trim().isEmpty);
 
     for (final line in lines) {
-      lastElement = parseLine(
+      lastElement = _parseLine(
           lineNumber: lineNumber, line: line, lastElement: lastElement);
       lineNumber++;
     }
@@ -54,7 +54,7 @@ class GedcomParser {
   /// Parses single line of GEDCOM input
   ///
   /// Returns resulting [GedcomElement]
-  GedcomElement parseLine({
+  GedcomElement _parseLine({
     @required int lineNumber,
     @required String line,
     @required GedcomElement lastElement,
