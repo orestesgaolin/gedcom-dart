@@ -105,6 +105,17 @@ class GedcomParser {
     return families;
   }
 
+  /// Returns all families in the provided [RootElement] based
+  /// on the elements map from [getElementsMap]
+  List<FamilyElement> getAllFamilies(
+      RootElement element, Map<String, GedcomElement> elementsMap) {
+    final list = <FamilyElement>[];
+    list.addAll(
+        element.children.whereType<FamilyElement>().cast<FamilyElement>());
+    print(list);
+    return list;
+  }
+
   /// Recursively add elements to a list containing elements
   List<GedcomElement> _buildList(GedcomElement element) {
     final list = <GedcomElement>[];
