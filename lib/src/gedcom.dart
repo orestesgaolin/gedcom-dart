@@ -187,6 +187,27 @@ class GedcomParser {
           value: value,
           crlf: crlf,
         );
+      } else if (tag == GEDCOM_TAG_DATE) {
+        element = DateElement(
+          level: level,
+          pointer: pointer,
+          value: value,
+          crlf: crlf,
+        );
+      } else if (tag == GEDCOM_TAG_BIRTH) {
+        element = BirthElement(
+          level: level,
+          pointer: pointer,
+          value: value,
+          crlf: crlf,
+        );
+      } else if (tag == GEDCOM_TAG_DEATH) {
+        element = DeathElement(
+          level: level,
+          pointer: pointer,
+          value: value,
+          crlf: crlf,
+        );
       } else {
         element = GedcomElement(
           level: level,

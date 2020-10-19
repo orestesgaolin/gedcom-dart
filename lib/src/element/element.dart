@@ -30,6 +30,9 @@ import 'dart:convert';
 import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
 
+part 'birth.dart';
+part 'date.dart';
+part 'death.dart';
 part 'family.dart';
 part 'file.dart';
 part 'individual.dart';
@@ -162,6 +165,30 @@ class GedcomElement {
       );
     } else if (tag == GEDCOM_TAG_OBJECT) {
       childElement = ObjectElement(
+        level: level + 1,
+        pointer: pointer,
+        value: value,
+        crlf: crlf,
+        parent: this,
+      );
+    } else if (tag == GEDCOM_TAG_DATE) {
+      childElement = DateElement(
+        level: level + 1,
+        pointer: pointer,
+        value: value,
+        crlf: crlf,
+        parent: this,
+      );
+    } else if (tag == GEDCOM_TAG_BIRTH) {
+      childElement = BirthElement(
+        level: level + 1,
+        pointer: pointer,
+        value: value,
+        crlf: crlf,
+        parent: this,
+      );
+    } else if (tag == GEDCOM_TAG_DEATH) {
+      childElement = DeathElement(
         level: level + 1,
         pointer: pointer,
         value: value,
