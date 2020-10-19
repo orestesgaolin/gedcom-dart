@@ -2,7 +2,7 @@ part of 'element.dart';
 
 /// Represents name of an individual
 @immutable
-class Name {
+class Name implements Comparable<Name> {
   /// Constructor of the Name class
   Name({
     @required this.givenName,
@@ -51,7 +51,7 @@ class Name {
   factory Name.fromJson(String source) => Name.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Name($givenName $surname)';
+  String toString() => '$surname $givenName';
 
   @override
   bool operator ==(Object o) {
@@ -62,4 +62,9 @@ class Name {
 
   @override
   int get hashCode => givenName.hashCode ^ surname.hashCode;
+
+  @override
+  int compareTo(Name other) {
+    return toString().compareTo(other.toString());
+  }
 }
