@@ -1,7 +1,7 @@
 name: gedcom
 description: Dart library to parse GEDCOM data from string input ported from
   popular Python library
-version: 0.0.2
+version: 0.0.3
 repository: https://github.com/orestesgaolin/gedcom-dart
 
 environment:
