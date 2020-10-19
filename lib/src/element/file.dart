@@ -1,6 +1,6 @@
 part of 'element.dart';
 
-/// GEDCOM element consisting of tag `GEDCOM_TAG_FILE`
+/// GEDCOM element consisting of tag [GEDCOM_TAG_FILE]
 class FileElement extends GedcomElement {
   /// Constructor of the FileElement
   FileElement({
