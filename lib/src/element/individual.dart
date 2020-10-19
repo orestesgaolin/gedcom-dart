@@ -1,7 +1,8 @@
 part of 'element.dart';
 
-/// GEDCOM element consisting of tag `GEDCOM_TAG_INDIVIDUAL`
-class IndividualElement extends GedcomElement {
+/// GEDCOM element consisting of tag [GEDCOM_TAG_INDIVIDUAL]
+class IndividualElement extends GedcomElement
+    implements Comparable<IndividualElement> {
   /// Constructor of the FileElement
   IndividualElement({
     @required int level,
@@ -100,5 +101,21 @@ class IndividualElement extends GedcomElement {
       parent: parent ?? this.parent,
       crlf: crlf ?? this.crlf,
     );
+  }
+
+  @override
+  int compareTo(IndividualElement other) {
+    if (birthDate == null) {
+      return -1;
+    }
+    if (other.birthDate == null) {
+      return 1;
+    }
+
+    final value = birthDate.compareTo(other.birthDate);
+    if (value == 0) {
+      return other.name.compareTo(other.name);
+    }
+    return value;
   }
 }
