@@ -33,9 +33,31 @@ class IndividualElement extends GedcomElement
   bool get isChild =>
       children.any((element) => element.tag == GEDCOM_TAG_FAMILY_CHILD);
 
+  /// Checks if this individual is a spouse/has a family
+  bool get isSpouse =>
+      children.any((element) => element.tag == GEDCOM_TAG_FAMILY_SPOUSE);
+
+  /// Returns pointer value of the family where individual
+  /// is wife or husband. Returns null if not available.
+  String get spouseFamily => isSpouse
+      ? children
+          .firstWhere((element) => element.tag == GEDCOM_TAG_FAMILY_SPOUSE)
+          .value
+      : null;
+
   /// Checks if this individual is marked private
   bool get isPrivate => children.any(
       (element) => element.tag == GEDCOM_TAG_PRIVATE && element.value == 'Y');
+
+  /// Returns individual's birth date. Returns null if not available.
+  DateTime get birthDate => children.any((e) => e is BirthElement)
+      ? (children.firstWhere((e) => e is BirthElement) as BirthElement).date
+      : null;
+
+  /// Returns individual's death date if deceased. Returns null if not available.
+  DateTime get deathDate => isDeceased
+      ? (children.firstWhere((e) => e is DeathElement) as DeathElement).date
+      : null;
 
   /// Returns an individual's name as [Name]
   Name get name {
