@@ -25,8 +25,6 @@
 // along with this program; if not, write to the Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-import 'package:meta/meta.dart';
-
 import 'element/element.dart';
 
 /// Class responsible for parsing GEDCOM data
@@ -55,10 +53,10 @@ class GedcomParser {
   ///
   /// Only elements identified by a pointer are listed in the dictionary.
   /// The keys for the dictionary are the pointers.
-  Map<String, GedcomElement> getElementsMap(RootElement element) {
-    final map = <String, GedcomElement>{};
+  Map<String?, GedcomElement> getElementsMap(RootElement element) {
+    final map = <String?, GedcomElement>{};
     for (final child in element.children) {
-      if (child.pointer != null && child.pointer.isNotEmpty) {
+      if (child.pointer != null && child.pointer!.isNotEmpty) {
         map[child.pointer] = child;
       }
     }
@@ -77,9 +75,9 @@ class GedcomParser {
   }
 
   /// Return family elements listed for an individual
-  List<FamilyElement> getFamilies(
-    IndividualElement individual,
-    Map<String, GedcomElement> elementsMap, {
+  List<FamilyElement?> getFamilies(
+    IndividualElement? individual,
+    Map<String?, GedcomElement> elementsMap, {
     FamilyRelation relation = FamilyRelation.spouse,
   }) {
     var tag = GEDCOM_TAG_FAMILY_SPOUSE;
@@ -95,11 +93,11 @@ class GedcomParser {
         break;
     }
 
-    final families = <FamilyElement>[];
-    for (final child in individual.children) {
+    final families = <FamilyElement?>[];
+    for (final child in individual!.children) {
       final isFamily = child.tag == tag;
       if (isFamily) {
-        families.add(elementsMap[child.value]);
+        families.add(elementsMap[child.value] as FamilyElement?);
       }
     }
     return families;
@@ -130,9 +128,9 @@ class GedcomParser {
   ///
   /// Returns resulting [GedcomElement]
   GedcomElement _parseLine({
-    @required int lineNumber,
-    @required String line,
-    @required GedcomElement lastElement,
+    required int lineNumber,
+    required String line,
+    required GedcomElement lastElement,
     bool strict = true,
   }) {
     final match = RegExp(_lineRe).firstMatch(line);
@@ -147,11 +145,11 @@ class GedcomParser {
         throw UnimplementedError();
       }
     } else {
-      final level = int.parse(match.group(1));
-      final pointer = match.group(2).trim();
-      final tag = match.group(3).trim().toUpperCase();
-      final value = match.group(4).trim();
-      final crlf = match.groupCount > 4 ? match.group(5).trim() : '\n';
+      final level = int.parse(match.group(1)!);
+      final pointer = match.group(2)!.trim();
+      final tag = match.group(3)!.trim().toUpperCase();
+      final value = match.group(4)!.trim();
+      final crlf = match.groupCount > 4 ? match.group(5)!.trim() : '\n';
 
       if (level > lastElement.level + 1) {
         throw Exception('Line $lineNumber of document violates GEDCOM '
@@ -219,7 +217,7 @@ class GedcomParser {
       }
       var parentElement = lastElement;
       while (parentElement.level > level - 1) {
-        parentElement = parentElement.parent;
+        parentElement = parentElement.parent!;
       }
 
       final newElement = parentElement.addChildElement(element);

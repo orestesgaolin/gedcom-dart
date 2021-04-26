@@ -7,7 +7,7 @@ void main() {
     final root = parser.parse(testData);
     expect(root, isA<RootElement>());
     expect(root.children.first, isA<IndividualElement>());
-    final IndividualElement ind = root.children.first;
+    final ind = root.children.first as IndividualElement;
     expect(ind.name.givenName, equals('Thomas Trask'));
   });
 
@@ -39,9 +39,12 @@ void main() {
     final parser = GedcomParser();
     final root = parser.parse(tortureTest1);
     final map = parser.getElementsMap(root);
-    final families1 = parser.getFamilies(map['@PERSON4@'], map);
-    final families2 = parser.getFamilies(map['@PERSON5@'], map);
-    final families3 = parser.getFamilies(map['@PERSON6@'], map);
+    final families1 =
+        parser.getFamilies(map['@PERSON4@'] as IndividualElement?, map);
+    final families2 =
+        parser.getFamilies(map['@PERSON5@'] as IndividualElement?, map);
+    final families3 =
+        parser.getFamilies(map['@PERSON6@'] as IndividualElement?, map);
     expect(families1, isEmpty);
     expect(families2.length, equals(1));
     expect(families3.length, equals(1));
@@ -51,10 +54,11 @@ void main() {
     final parser = GedcomParser();
     final root = parser.parse(tortureTest1);
     final map = parser.getElementsMap(root);
-    final families1 = parser.getFamilies(map['@PERSON4@'], map,
+    final families1 = parser.getFamilies(
+        map['@PERSON4@'] as IndividualElement?, map,
         relation: FamilyRelation.child);
     expect(families1, isNotEmpty);
-    expect(families1.first.children.length, equals(24));
+    expect(families1.first!.children.length, equals(24));
   });
 }
 

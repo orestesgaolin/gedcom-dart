@@ -5,14 +5,13 @@ class IndividualElement extends GedcomElement
     implements Comparable<IndividualElement> {
   /// Constructor of the FileElement
   IndividualElement({
-    @required int level,
-    String pointer,
-    String value,
-    List<GedcomElement> children,
-    GedcomElement parent,
-    String crlf = '\n',
-  })  : assert(level != null, 'Level is required'),
-        super(
+    required int level,
+    String? pointer,
+    String? value,
+    List<GedcomElement>? children,
+    GedcomElement? parent,
+    String? crlf = '\n',
+  }) : super(
           level: level,
           tag: GEDCOM_TAG_INDIVIDUAL,
           pointer: pointer,
@@ -39,7 +38,7 @@ class IndividualElement extends GedcomElement
 
   /// Returns pointer value of the family where individual
   /// is wife or husband. Returns null if not available.
-  String get spouseFamily => isSpouse
+  String? get spouseFamily => isSpouse
       ? children
           .firstWhere((element) => element.tag == GEDCOM_TAG_FAMILY_SPOUSE)
           .value
@@ -50,19 +49,19 @@ class IndividualElement extends GedcomElement
       (element) => element.tag == GEDCOM_TAG_PRIVATE && element.value == 'Y');
 
   /// Returns individual's birth date. Returns null if not available.
-  DateTime get birthDate => children.any((e) => e is BirthElement)
+  DateTime? get birthDate => children.any((e) => e is BirthElement)
       ? (children.firstWhere((e) => e is BirthElement) as BirthElement).date
       : null;
 
   /// Returns individual's death date if deceased. Returns null if not available.
-  DateTime get deathDate => isDeceased
+  DateTime? get deathDate => isDeceased
       ? (children.firstWhere((e) => e is DeathElement) as DeathElement).date
       : null;
 
   /// Returns an individual's name as [Name]
   Name get name {
-    String givenName;
-    String surname;
+    String? givenName;
+    String? surname;
 
     var foundGivenName = false;
     var foundSurname = false;
@@ -72,7 +71,7 @@ class IndividualElement extends GedcomElement
         // Some GEDCOM files don't use child tags but instead
         // place the name in the value of the NAME tag.
         if (child.value != '') {
-          final name = child.value.split('/');
+          final name = child.value!.split('/');
           if (name.isNotEmpty) {
             givenName = name[0].trim();
             if (name.length > 1) {
@@ -107,13 +106,13 @@ class IndividualElement extends GedcomElement
   /// Returns copy of the element
   @override
   IndividualElement copyWith({
-    int level,
-    String pointer,
-    String tag,
-    String value,
-    List<GedcomElement> children,
-    GedcomElement parent,
-    String crlf,
+    int? level,
+    String? pointer,
+    String? tag,
+    String? value,
+    List<GedcomElement>? children,
+    GedcomElement? parent,
+    String? crlf,
   }) {
     return IndividualElement(
       level: level ?? this.level,
@@ -134,7 +133,7 @@ class IndividualElement extends GedcomElement
       return 1;
     }
 
-    final value = birthDate.compareTo(other.birthDate);
+    final value = birthDate!.compareTo(other.birthDate!);
     if (value == 0) {
       return other.name.compareTo(other.name);
     }

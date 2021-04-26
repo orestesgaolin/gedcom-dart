@@ -26,4 +26,4 @@ jobs:
         run: dartanalyzer --fatal-infos --fatal-warnings lib
 
       - name: Run tests
-        run: pub run test_coverage
+        run: dart test --coverage=coverage && pub run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --packages=.packages --report-on=lib

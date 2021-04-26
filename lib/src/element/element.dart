@@ -27,7 +27,8 @@
 
 import 'dart:convert';
 
-import 'package:collection/collection.dart';
+import 'package:collection/collection.dart'
+    show IterableExtension, DeepCollectionEquality;
 import 'package:meta/meta.dart';
 
 part 'birth.dart';
@@ -69,28 +70,26 @@ part 'tags.dart';
 class GedcomElement {
   /// Constructor of the element
   GedcomElement({
-    @required this.level,
-    @required this.tag,
+    required this.level,
+    required this.tag,
     this.pointer,
     this.value,
-    List<GedcomElement> children,
+    List<GedcomElement>? children,
     this.parent,
     this.crlf = '\n',
-  })  : _children = children ?? [],
-        assert(level != null, 'Level is required'),
-        assert(tag != null, 'Tag is required');
+  }) : _children = children ?? [];
 
   /// Level of the element within the GEDCOM file
   final int level;
 
   /// Pointer of the element withing the GEDCOM file
-  final String pointer;
+  final String? pointer;
 
   /// Tag of the element within the GEDCOM file
   final String tag;
 
   /// Value of the element within the GEDCOM file
-  final String value;
+  final String? value;
 
   final List<GedcomElement> _children;
 
@@ -107,19 +106,19 @@ class GedcomElement {
   }
 
   /// Parent element of the element
-  final GedcomElement parent;
+  final GedcomElement? parent;
 
   /// Value of the element including concatenations or continuations
-  String get multiLineValue {
-    var result = value;
+  String? get multiLineValue {
+    var result = value ?? '';
     var lastCrlf = crlf;
     for (var element in children) {
       var tag = element.tag;
       if (tag == GEDCOM_TAG_CONCATENATION) {
-        result += element.value;
+        result += element.value!;
         lastCrlf = element.crlf;
       } else if (tag == GEDCOM_TAG_CONTINUED) {
-        result += lastCrlf + element.value;
+        result += lastCrlf! + element.value!;
         lastCrlf = element.crlf;
       }
     }
@@ -127,14 +126,14 @@ class GedcomElement {
   }
 
   /// Character used to delimit new lines
-  final String crlf;
+  final String? crlf;
 
   /// Indicates whether element consist of multiple lines
   bool get isMultiline => multiLineValue != null;
 
   /// Creates and returns a new child element of this element
   GedcomElement newChildElement({
-    String tag,
+    String? tag,
     String pointer = '',
     String value = '',
   }) {
@@ -199,7 +198,7 @@ class GedcomElement {
       childElement = GedcomElement(
         level: level + 1,
         pointer: pointer,
-        tag: tag,
+        tag: tag!,
         value: value,
         crlf: crlf,
         parent: this,
@@ -214,17 +213,17 @@ class GedcomElement {
   String toGedcomString({bool recursive = false}) {
     var result = '$level';
 
-    if (pointer != null && pointer.isNotEmpty) {
+    if (pointer != null && pointer!.isNotEmpty) {
       result += ' $pointer';
     }
 
     result += ' $tag';
 
-    if (value != null && value.isNotEmpty) {
+    if (value != null && value!.isNotEmpty) {
       result += ' $value';
     }
 
-    result += crlf;
+    result += crlf!;
 
     if (level < 0) {
       result = '';
@@ -241,13 +240,13 @@ class GedcomElement {
 
   /// Returns copy of the element
   GedcomElement copyWith({
-    int level,
-    String pointer,
-    String tag,
-    String value,
-    List<GedcomElement> children,
-    GedcomElement parent,
-    String crlf,
+    int? level,
+    String? pointer,
+    String? tag,
+    String? value,
+    List<GedcomElement>? children,
+    GedcomElement? parent,
+    String? crlf,
   }) {
     return GedcomElement(
       level: level ?? this.level,
@@ -267,15 +266,17 @@ class GedcomElement {
       'pointer': pointer,
       'tag': tag,
       'value': value,
-      'children': children?.map((x) => x?.toMap())?.toList(),
+      'children': children.map((x) => x.toMap()).toList(),
       'parent': parent?.toMap(),
       'crlf': crlf,
     };
   }
 
+  static final empty = GedcomElement(level: -1, tag: '');
+
   /// Creates element from map
-  factory GedcomElement.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory GedcomElement.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return GedcomElement.empty;
 
     return GedcomElement(
       level: map['level'],

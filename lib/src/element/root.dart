@@ -4,8 +4,8 @@ part of 'element.dart';
 class RootElement extends GedcomElement {
   /// Constructor of the FamilyElement
   RootElement({
-    List<GedcomElement> children,
-    String crlf = '\n',
+    List<GedcomElement>? children,
+    String? crlf = '\n',
   }) : super(
           level: -1,
           tag: 'ROOT',
@@ -22,13 +22,13 @@ class RootElement extends GedcomElement {
   /// Returns copy of the element
   @override
   RootElement copyWith({
-    int level,
-    String pointer,
-    String tag,
-    String value,
-    List<GedcomElement> children,
-    GedcomElement parent,
-    String crlf,
+    int? level,
+    String? pointer,
+    String? tag,
+    String? value,
+    List<GedcomElement>? children,
+    GedcomElement? parent,
+    String? crlf,
   }) {
     assert(level == null, 'Cannot set level on RootElement');
     assert(pointer == null, 'Cannot set pointer on RootElement');
