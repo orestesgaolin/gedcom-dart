@@ -5,20 +5,20 @@ part of 'element.dart';
 class Name implements Comparable<Name> {
   /// Constructor of the Name class
   Name({
-    @required this.givenName,
-    @required this.surname,
+    required this.givenName,
+    required this.surname,
   });
 
   /// Given name (first name) of the individual
-  final String givenName;
+  final String? givenName;
 
   /// Surname (last name) of the individual
-  final String surname;
+  final String? surname;
 
   // ignore: public_member_api_docs
   Name copyWith({
-    String givenName,
-    String surname,
+    String? givenName,
+    String? surname,
   }) {
     return Name(
       givenName: givenName ?? this.givenName,
@@ -34,9 +34,11 @@ class Name implements Comparable<Name> {
     };
   }
 
+  static final empty = Name(givenName: '', surname: '');
+
   // ignore: public_member_api_docs
-  factory Name.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory Name.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return Name.empty;
 
     return Name(
       givenName: map['givenName'],

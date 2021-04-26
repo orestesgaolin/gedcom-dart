@@ -4,14 +4,13 @@ part of 'element.dart';
 class DeathElement extends GedcomElement {
   /// Constructor of the FileElement
   DeathElement({
-    @required int level,
-    String pointer,
-    String value,
-    List<GedcomElement> children,
-    GedcomElement parent,
-    String crlf = '\n',
-  })  : assert(level != null, 'Level is required'),
-        super(
+    required int level,
+    String? pointer,
+    String? value,
+    List<GedcomElement>? children,
+    GedcomElement? parent,
+    String? crlf = '\n',
+  }) : super(
           level: level,
           tag: GEDCOM_TAG_DEATH,
           pointer: pointer,
@@ -24,20 +23,20 @@ class DeathElement extends GedcomElement {
   @override
   String get tag => GEDCOM_TAG_DEATH;
 
-  DateTime get date => children.any((e) => e is DateElement)
+  DateTime? get date => children.any((e) => e is DateElement)
       ? (children.firstWhere((e) => e is DateElement) as DateElement).date
       : null;
 
   /// Returns copy of the element
   @override
   DeathElement copyWith({
-    int level,
-    String pointer,
-    String tag,
-    String value,
-    List<GedcomElement> children,
-    GedcomElement parent,
-    String crlf,
+    int? level,
+    String? pointer,
+    String? tag,
+    String? value,
+    List<GedcomElement>? children,
+    GedcomElement? parent,
+    String? crlf,
   }) {
     return DeathElement(
       level: level ?? this.level,

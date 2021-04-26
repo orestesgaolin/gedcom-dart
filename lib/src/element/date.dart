@@ -4,14 +4,13 @@ part of 'element.dart';
 class DateElement extends GedcomElement {
   /// Constructor of the FileElement
   DateElement({
-    @required int level,
-    String pointer,
-    String value,
-    List<GedcomElement> children,
-    GedcomElement parent,
-    String crlf = '\n',
-  })  : assert(level != null, 'Level is required'),
-        super(
+    required int level,
+    String? pointer,
+    String? value,
+    List<GedcomElement>? children,
+    GedcomElement? parent,
+    String? crlf = '\n',
+  }) : super(
           level: level,
           tag: GEDCOM_TAG_BIRTH,
           pointer: pointer,
@@ -24,13 +23,13 @@ class DateElement extends GedcomElement {
   @override
   String get tag => GEDCOM_TAG_BIRTH;
 
-  DateTime get date => _parseDate();
+  DateTime? get date => _parseDate();
 
-  DateTime _parseDate() {
-    if (value == null || value.isEmpty) {
+  DateTime? _parseDate() {
+    if (value == null || value!.isEmpty) {
       return null;
     }
-    final values = value.split(' ').toList();
+    final values = value!.split(' ').toList();
     if (values.isNotEmpty) {
       if (values.length == 1) {
         if (values.first.length == 4) {
@@ -40,13 +39,13 @@ class DateElement extends GedcomElement {
           }
         }
       } else if (values.length == 2) {
-        final month = months[values[0]];
-        final year = int.tryParse(values[1]);
+        final month = months[values[0]]!;
+        final year = int.tryParse(values[1])!;
         return DateTime(year, month);
       } else if (values.length == 3) {
-        final day = int.tryParse(values[0]);
-        final month = months[values[1]];
-        final year = int.tryParse(values[2]);
+        final day = int.tryParse(values[0])!;
+        final month = months[values[1]]!;
+        final year = int.tryParse(values[2])!;
         return DateTime(year, month, day);
       }
     }
@@ -56,13 +55,13 @@ class DateElement extends GedcomElement {
   /// Returns copy of the element
   @override
   DateElement copyWith({
-    int level,
-    String pointer,
-    String tag,
-    String value,
-    List<GedcomElement> children,
-    GedcomElement parent,
-    String crlf,
+    int? level,
+    String? pointer,
+    String? tag,
+    String? value,
+    List<GedcomElement>? children,
+    GedcomElement? parent,
+    String? crlf,
   }) {
     return DateElement(
       level: level ?? this.level,

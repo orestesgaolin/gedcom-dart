@@ -4,14 +4,13 @@ part of 'element.dart';
 class FileElement extends GedcomElement {
   /// Constructor of the FileElement
   FileElement({
-    @required int level,
-    String pointer,
-    String value,
-    List<GedcomElement> children,
-    GedcomElement parent,
-    String crlf = '\n',
-  })  : assert(level != null, 'Level is required'),
-        super(
+    required int level,
+    String? pointer,
+    String? value,
+    List<GedcomElement>? children,
+    GedcomElement? parent,
+    String? crlf = '\n',
+  }) : super(
           level: level,
           tag: GEDCOM_TAG_FILE,
           pointer: pointer,
@@ -27,13 +26,13 @@ class FileElement extends GedcomElement {
   /// Returns copy of the element
   @override
   FileElement copyWith({
-    int level,
-    String pointer,
-    String tag,
-    String value,
-    List<GedcomElement> children,
-    GedcomElement parent,
-    String crlf,
+    int? level,
+    String? pointer,
+    String? tag,
+    String? value,
+    List<GedcomElement>? children,
+    GedcomElement? parent,
+    String? crlf,
   }) {
     return FileElement(
       level: level ?? this.level,

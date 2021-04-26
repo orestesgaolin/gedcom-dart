@@ -1,3 +1,7 @@
+## [0.1.0] - Migrate to nnbd
+
+* migrate to null safety and update dependencies
+
 ## [0.0.3] - More features
 
 ### Features
