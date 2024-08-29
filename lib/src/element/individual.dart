@@ -5,20 +5,14 @@ class IndividualElement extends GedcomElement
     implements Comparable<IndividualElement> {
   /// Constructor of the FileElement
   IndividualElement({
-    required int level,
-    String? pointer,
-    String? value,
-    List<GedcomElement>? children,
-    GedcomElement? parent,
-    String? crlf = '\n',
+    required super.level,
+    super.pointer,
+    super.value,
+    super.children,
+    super.parent,
+    super.crlf,
   }) : super(
-          level: level,
           tag: GEDCOM_TAG_INDIVIDUAL,
-          pointer: pointer,
-          value: value,
-          children: children,
-          parent: parent,
-          crlf: crlf,
         );
 
   @override

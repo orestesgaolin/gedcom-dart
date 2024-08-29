@@ -301,18 +301,18 @@ class GedcomElement {
   String toString() => toGedcomString();
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
 
-    return o is GedcomElement &&
-        o.level == level &&
-        o.pointer == pointer &&
-        o.tag == tag &&
-        o.value == value &&
-        listEquals(o.children, children) &&
-        o.parent == parent &&
-        o.crlf == crlf;
+    return other is GedcomElement &&
+        other.level == level &&
+        other.pointer == pointer &&
+        other.tag == tag &&
+        other.value == value &&
+        listEquals(other.children, children) &&
+        other.parent == parent &&
+        other.crlf == crlf;
   }
 
   @override

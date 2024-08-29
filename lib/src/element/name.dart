@@ -56,10 +56,12 @@ class Name implements Comparable<Name> {
   String toString() => '$surname $givenName';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is Name && o.givenName == givenName && o.surname == surname;
+    return other is Name &&
+        other.givenName == givenName &&
+        other.surname == surname;
   }
 
   @override

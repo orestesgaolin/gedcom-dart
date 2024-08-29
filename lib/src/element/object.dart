@@ -4,20 +4,14 @@ part of 'element.dart';
 class ObjectElement extends GedcomElement {
   /// Constructor of the FileElement
   ObjectElement({
-    required int level,
-    String? pointer,
-    String? value,
-    List<GedcomElement>? children,
-    GedcomElement? parent,
-    String? crlf = '\n',
+    required super.level,
+    super.pointer,
+    super.value,
+    super.children,
+    super.parent,
+    super.crlf,
   }) : super(
-          level: level,
           tag: GEDCOM_TAG_OBJECT,
-          pointer: pointer,
-          value: value,
-          children: children,
-          parent: parent,
-          crlf: crlf,
         );
 
   @override
