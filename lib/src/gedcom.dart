@@ -25,7 +25,7 @@
 // along with this program; if not, write to the Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-import 'element/element.dart';
+import 'package:gedcom/src/element/element.dart';
 
 /// Class responsible for parsing GEDCOM data
 class GedcomParser {
@@ -43,7 +43,10 @@ class GedcomParser {
 
     for (final line in lines) {
       lastElement = _parseLine(
-          lineNumber: lineNumber, line: line, lastElement: lastElement);
+        lineNumber: lineNumber,
+        line: line,
+        lastElement: lastElement,
+      );
       lineNumber++;
     }
     return _root;
@@ -68,7 +71,7 @@ class GedcomParser {
   /// By default elements are in the same order as they appeared in the file.
   List<GedcomElement> getElementsList(RootElement element) {
     final list = <GedcomElement>[];
-    for (var element in element.children) {
+    for (final element in element.children) {
       list.addAll(_buildList(element));
     }
     return list;
@@ -84,13 +87,10 @@ class GedcomParser {
     switch (relation) {
       case FamilyRelation.spouse:
         tag = GEDCOM_TAG_FAMILY_SPOUSE;
-        break;
       case FamilyRelation.child:
         tag = GEDCOM_TAG_FAMILY_CHILD;
-        break;
       case FamilyRelation.other:
         tag = GEDCOM_TAG_FAMILY;
-        break;
     }
 
     final families = <FamilyElement?>[];
@@ -106,18 +106,15 @@ class GedcomParser {
   /// Returns all families in the provided [RootElement] based
   /// on the elements map from [getElementsMap]
   List<FamilyElement> getAllFamilies(
-      RootElement element, Map<String, GedcomElement> elementsMap) {
-    final list = <FamilyElement>[];
-    list.addAll(
-        element.children.whereType<FamilyElement>().cast<FamilyElement>());
-    print(list);
-    return list;
+    RootElement element,
+    Map<String, GedcomElement> elementsMap,
+  ) {
+    return element.children.whereType<FamilyElement>().toList();
   }
 
   /// Recursively add elements to a list containing elements
   List<GedcomElement> _buildList(GedcomElement element) {
-    final list = <GedcomElement>[];
-    list.add(element);
+    final list = <GedcomElement>[element];
     for (final child in element.children) {
       list.addAll(_buildList(child));
     }

@@ -28,7 +28,7 @@
 import 'dart:convert';
 
 import 'package:collection/collection.dart'
-    show IterableExtension, DeepCollectionEquality;
+    show DeepCollectionEquality, IterableExtension;
 import 'package:meta/meta.dart';
 
 part 'birth.dart';
@@ -79,6 +79,29 @@ class GedcomElement {
     this.crlf = '\n',
   }) : _children = children ?? [];
 
+  /// Creates element from map
+  factory GedcomElement.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return GedcomElement.empty;
+
+    return GedcomElement(
+      level: map['level'] as int,
+      pointer: map['pointer'] as String?,
+      tag: map['tag'] as String,
+      value: map['value'] as String?,
+      children: List<GedcomElement>.from(
+        (map['children'] as List<Map<String, dynamic>>?)
+                ?.map(GedcomElement.fromMap) ??
+            [],
+      ),
+      parent: GedcomElement.fromMap(map['parent'] as Map<String, dynamic>?),
+      crlf: map['crlf'] as String?,
+    );
+  }
+
+  /// Creates element from JSON
+  factory GedcomElement.fromJson(String source) =>
+      GedcomElement.fromMap(json.decode(source) as Map<String, dynamic>);
+
   /// Level of the element within the GEDCOM file
   final int level;
 
@@ -112,8 +135,8 @@ class GedcomElement {
   String? get multiLineValue {
     var result = value ?? '';
     var lastCrlf = crlf;
-    for (var element in children) {
-      var tag = element.tag;
+    for (final element in children) {
+      final tag = element.tag;
       if (tag == GEDCOM_TAG_CONCATENATION) {
         result += element.value!;
         lastCrlf = element.crlf;
@@ -211,31 +234,31 @@ class GedcomElement {
   /// Formats this element and optionally all of its subelements
   /// to GEDCOM string
   String toGedcomString({bool recursive = false}) {
-    var result = '$level';
+    final buffer = StringBuffer();
 
-    if (pointer != null && pointer!.isNotEmpty) {
-      result += ' $pointer';
+    if (level >= 0) {
+      buffer.write('$level');
+
+      if (pointer != null && pointer!.isNotEmpty) {
+        buffer.write(' $pointer');
+      }
+
+      buffer.write(' $tag');
+
+      if (value != null && value!.isNotEmpty) {
+        buffer.write(' $value');
+      }
+
+      buffer.write(crlf);
     }
 
-    result += ' $tag';
-
-    if (value != null && value!.isNotEmpty) {
-      result += ' $value';
-    }
-
-    result += crlf!;
-
-    if (level < 0) {
-      result = '';
-    }
-
-    if (recursive == true) {
+    if (recursive) {
       for (final element in children) {
-        result += element.toGedcomString(recursive: true);
+        buffer.write(element.toGedcomString(recursive: true));
       }
     }
 
-    return result;
+    return buffer.toString();
   }
 
   /// Returns copy of the element
@@ -274,28 +297,8 @@ class GedcomElement {
 
   static final empty = GedcomElement(level: -1, tag: '');
 
-  /// Creates element from map
-  factory GedcomElement.fromMap(Map<String, dynamic>? map) {
-    if (map == null) return GedcomElement.empty;
-
-    return GedcomElement(
-      level: map['level'],
-      pointer: map['pointer'],
-      tag: map['tag'],
-      value: map['value'],
-      children: List<GedcomElement>.from(
-          map['children']?.map((x) => GedcomElement.fromMap(x))),
-      parent: GedcomElement.fromMap(map['parent']),
-      crlf: map['crlf'],
-    );
-  }
-
   /// Returns JSON representation of the elmenet
   String toJson() => json.encode(toMap());
-
-  /// Creates element from JSON
-  factory GedcomElement.fromJson(String source) =>
-      GedcomElement.fromMap(json.decode(source));
 
   @override
   String toString() => toGedcomString();
