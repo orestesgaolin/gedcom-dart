@@ -14,9 +14,6 @@ class RootElement extends GedcomElement {
           parent: null,
         );
 
-  @override
-  String get tag => 'ROOT';
-
   /// Returns copy of the element
   @override
   RootElement copyWith({

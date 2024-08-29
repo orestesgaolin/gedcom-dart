@@ -14,9 +14,6 @@ class BirthElement extends GedcomElement {
           tag: GEDCOM_TAG_BIRTH,
         );
 
-  @override
-  String get tag => GEDCOM_TAG_BIRTH;
-
   DateTime? get date => children.any((e) => e is DateElement)
       ? (children.firstWhere((e) => e is DateElement) as DateElement).date
       : null;

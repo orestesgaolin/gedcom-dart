@@ -14,9 +14,6 @@ class DeathElement extends GedcomElement {
           tag: GEDCOM_TAG_DEATH,
         );
 
-  @override
-  String get tag => GEDCOM_TAG_DEATH;
-
   DateTime? get date => children.any((e) => e is DateElement)
       ? (children.firstWhere((e) => e is DateElement) as DateElement).date
       : null;

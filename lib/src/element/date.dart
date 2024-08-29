@@ -11,11 +11,8 @@ class DateElement extends GedcomElement {
     super.parent,
     super.crlf,
   }) : super(
-          tag: GEDCOM_TAG_BIRTH,
+          tag: GEDCOM_TAG_DATE,
         );
-
-  @override
-  String get tag => GEDCOM_TAG_BIRTH;
 
   DateTime? get date => _parseDate();
 

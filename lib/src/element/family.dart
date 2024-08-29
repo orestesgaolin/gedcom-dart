@@ -14,9 +14,6 @@ class FamilyElement extends GedcomElement {
           tag: GEDCOM_TAG_FAMILY,
         );
 
-  @override
-  String get tag => GEDCOM_TAG_FAMILY;
-
   /// Returns the husband/father of the family
   ///
   /// Returns null if not found

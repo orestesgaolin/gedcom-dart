@@ -15,9 +15,6 @@ class IndividualElement extends GedcomElement
           tag: GEDCOM_TAG_INDIVIDUAL,
         );
 
-  @override
-  String get tag => GEDCOM_TAG_INDIVIDUAL;
-
   /// Checks if this individual is deceased
   bool get isDeceased =>
       children.any((element) => element.tag == GEDCOM_TAG_DEATH);

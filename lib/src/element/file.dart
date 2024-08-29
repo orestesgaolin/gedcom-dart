@@ -14,9 +14,6 @@ class FileElement extends GedcomElement {
           tag: GEDCOM_TAG_FILE,
         );
 
-  @override
-  String get tag => GEDCOM_TAG_FILE;
-
   /// Returns copy of the element
   @override
   FileElement copyWith({

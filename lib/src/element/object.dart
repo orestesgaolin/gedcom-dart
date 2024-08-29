@@ -14,9 +14,6 @@ class ObjectElement extends GedcomElement {
           tag: GEDCOM_TAG_OBJECT,
         );
 
-  @override
-  String get tag => GEDCOM_TAG_OBJECT;
-
   /// Returns copy of the element
   @override
   ObjectElement copyWith({
