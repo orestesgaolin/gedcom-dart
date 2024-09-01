@@ -1,1 +1,6 @@
-include: package:pedantic/analysis_options.yaml
+include: package:very_good_analysis/analysis_options.yaml
+linter:
+  rules:
+    flutter_style_todos: false
+    lines_longer_than_80_chars: false
+    public_member_api_docs: false

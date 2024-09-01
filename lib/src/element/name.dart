@@ -4,10 +4,24 @@ part of 'element.dart';
 @immutable
 class Name implements Comparable<Name> {
   /// Constructor of the Name class
-  Name({
+  const Name({
     required this.givenName,
     required this.surname,
   });
+
+  // ignore: public_member_api_docs
+  factory Name.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return Name.empty;
+
+    return Name(
+      givenName: map['givenName'] as String?,
+      surname: map['surname'] as String?,
+    );
+  }
+
+  // ignore: public_member_api_docs
+  factory Name.fromJson(String source) =>
+      Name.fromMap(json.decode(source) as Map<String, dynamic>);
 
   /// Given name (first name) of the individual
   final String? givenName;
@@ -34,32 +48,21 @@ class Name implements Comparable<Name> {
     };
   }
 
-  static final empty = Name(givenName: '', surname: '');
-
-  // ignore: public_member_api_docs
-  factory Name.fromMap(Map<String, dynamic>? map) {
-    if (map == null) return Name.empty;
-
-    return Name(
-      givenName: map['givenName'],
-      surname: map['surname'],
-    );
-  }
+  static const empty = Name(givenName: '', surname: '');
 
   // ignore: public_member_api_docs
   String toJson() => json.encode(toMap());
-
-  // ignore: public_member_api_docs
-  factory Name.fromJson(String source) => Name.fromMap(json.decode(source));
 
   @override
   String toString() => '$surname $givenName';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is Name && o.givenName == givenName && o.surname == surname;
+    return other is Name &&
+        other.givenName == givenName &&
+        other.surname == surname;
   }
 
   @override

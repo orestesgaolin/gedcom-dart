@@ -4,20 +4,15 @@ part of 'element.dart';
 class RootElement extends GedcomElement {
   /// Constructor of the FamilyElement
   RootElement({
-    List<GedcomElement>? children,
-    String? crlf = '\n',
+    super.children,
+    super.crlf,
   }) : super(
           level: -1,
           tag: 'ROOT',
           pointer: '',
           value: '',
-          children: children,
           parent: null,
-          crlf: crlf,
         );
-
-  @override
-  String get tag => 'ROOT';
 
   /// Returns copy of the element
   @override

@@ -5,24 +5,15 @@ class IndividualElement extends GedcomElement
     implements Comparable<IndividualElement> {
   /// Constructor of the FileElement
   IndividualElement({
-    required int level,
-    String? pointer,
-    String? value,
-    List<GedcomElement>? children,
-    GedcomElement? parent,
-    String? crlf = '\n',
+    required super.level,
+    super.pointer,
+    super.value,
+    super.children,
+    super.parent,
+    super.crlf,
   }) : super(
-          level: level,
           tag: GEDCOM_TAG_INDIVIDUAL,
-          pointer: pointer,
-          value: value,
-          children: children,
-          parent: parent,
-          crlf: crlf,
         );
-
-  @override
-  String get tag => GEDCOM_TAG_INDIVIDUAL;
 
   /// Checks if this individual is deceased
   bool get isDeceased =>
@@ -46,7 +37,8 @@ class IndividualElement extends GedcomElement
 
   /// Checks if this individual is marked private
   bool get isPrivate => children.any(
-      (element) => element.tag == GEDCOM_TAG_PRIVATE && element.value == 'Y');
+        (element) => element.tag == GEDCOM_TAG_PRIVATE && element.value == 'Y',
+      );
 
   /// Returns individual's birth date. Returns null if not available.
   DateTime? get birthDate => children.any((e) => e is BirthElement)
@@ -97,10 +89,7 @@ class IndividualElement extends GedcomElement
       }
     }
     // If we reach here we are probably returning empty strings
-    return Name(
-      givenName: '',
-      surname: '',
-    );
+    return Name.empty;
   }
 
   /// Returns copy of the element

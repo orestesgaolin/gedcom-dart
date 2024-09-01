@@ -4,24 +4,15 @@ part of 'element.dart';
 class FileElement extends GedcomElement {
   /// Constructor of the FileElement
   FileElement({
-    required int level,
-    String? pointer,
-    String? value,
-    List<GedcomElement>? children,
-    GedcomElement? parent,
-    String? crlf = '\n',
+    required super.level,
+    super.pointer,
+    super.value,
+    super.children,
+    super.parent,
+    super.crlf,
   }) : super(
-          level: level,
           tag: GEDCOM_TAG_FILE,
-          pointer: pointer,
-          value: value,
-          children: children,
-          parent: parent,
-          crlf: crlf,
         );
-
-  @override
-  String get tag => GEDCOM_TAG_FILE;
 
   /// Returns copy of the element
   @override

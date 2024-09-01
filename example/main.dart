@@ -31,6 +31,7 @@ const testData = '''
 void main() {
   final parser = GedcomParser();
   final root = parser.parse(testData);
+  // ignore: avoid_print
   print(root.toGedcomString(recursive: true));
   //Output:
 
