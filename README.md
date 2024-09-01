@@ -4,6 +4,9 @@ Port of [python-gedcom](https://github.com/nickreynke/python-gedcom) library to 
 
 GEDCOM files contain ancestry data. The parser is currently supporting the GEDCOM 5.5 format.
 
+> [!NOTE]  
+> Looking for contributors to implement [support for GEDCOM 7.0](https://github.com/orestesgaolin/gedcom-dart/issues/5).
+
 # Warning
 
 The package is still in development. Only selected features are supported.
