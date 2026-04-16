@@ -304,12 +304,18 @@ void main() {
       // Each BIRT should have NOTE, DATE, and DATE should have PHRASE
       for (final birth in births) {
         final dateElements = birth.children.whereType<DateElement>().toList();
-        expect(dateElements.length, 1,
-            reason: 'Each BIRT should have one DATE',);
+        expect(
+          dateElements.length,
+          1,
+          reason: 'Each BIRT should have one DATE',
+        );
         final phrase =
             dateElements.first.children.where((e) => e.tag == 'PHRASE');
-        expect(phrase.length, 1,
-            reason: 'Each DATE in dual-invalid should have a PHRASE',);
+        expect(
+          phrase.length,
+          1,
+          reason: 'Each DATE in dual-invalid should have a PHRASE',
+        );
       }
 
       // v7 dual dates are converted: "1701/99" -> "BET 1701 AND 1799"

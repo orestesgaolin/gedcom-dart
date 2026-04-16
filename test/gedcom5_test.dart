@@ -282,12 +282,18 @@ void main() {
       // Each BIRT should have NOTE and DATE
       for (final birth in births) {
         final dateElements = birth.children.whereType<DateElement>().toList();
-        expect(dateElements.length, 1,
-            reason: 'Each BIRT should have one DATE',);
+        expect(
+          dateElements.length,
+          1,
+          reason: 'Each BIRT should have one DATE',
+        );
         final noteElements =
             birth.children.where((e) => e.tag == 'NOTE').toList();
-        expect(noteElements.length, 1,
-            reason: 'Each BIRT should have one NOTE',);
+        expect(
+          noteElements.length,
+          1,
+          reason: 'Each BIRT should have one NOTE',
+        );
       }
 
       // v5 keeps dual dates as-is: "1701/99" -> not parseable
