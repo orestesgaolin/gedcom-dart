@@ -135,7 +135,8 @@ class Gedcom7Parser {
     if (match == null) {
       if (strict == true) {
         throw Exception(
-            'Line $lineNumber $line of document violates GEDCOM format 7.0');
+          'Line $lineNumber $line of document violates GEDCOM format 7.0',
+        );
       } else {
         //TODO: handle non-strict case as https://github.com/nickreynke/python-gedcom/blob/master/gedcom/parser.py
         throw UnimplementedError();

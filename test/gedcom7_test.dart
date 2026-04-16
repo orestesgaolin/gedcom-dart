@@ -111,8 +111,7 @@ void main() {
       // Verify specific age formats are parsed
       final firstEvent = events.first;
       expect(firstEvent.value, 'when 0');
-      final firstAge =
-          firstEvent.children.firstWhere((e) => e.tag == 'AGE');
+      final firstAge = firstEvent.children.firstWhere((e) => e.tag == 'AGE');
       expect(firstAge.value, '0y');
     });
 
@@ -127,10 +126,8 @@ void main() {
       expect(events.length, greaterThan(30));
 
       // Verify PHRASE subrecords exist on age keyword events
-      final childEvent =
-          events.firstWhere((e) => e.value == 'when child');
-      final childAge =
-          childEvent.children.firstWhere((e) => e.tag == 'AGE');
+      final childEvent = events.firstWhere((e) => e.value == 'when child');
+      final childAge = childEvent.children.firstWhere((e) => e.tag == 'AGE');
       expect(childAge.value, '< 8y');
       final childPhrase =
           childAge.children.firstWhere((e) => e.tag == 'PHRASE');
@@ -306,14 +303,13 @@ void main() {
 
       // Each BIRT should have NOTE, DATE, and DATE should have PHRASE
       for (final birth in births) {
-        final dateElements =
-            birth.children.whereType<DateElement>().toList();
+        final dateElements = birth.children.whereType<DateElement>().toList();
         expect(dateElements.length, 1,
-            reason: 'Each BIRT should have one DATE');
+            reason: 'Each BIRT should have one DATE',);
         final phrase =
             dateElements.first.children.where((e) => e.tag == 'PHRASE');
         expect(phrase.length, 1,
-            reason: 'Each DATE in dual-invalid should have a PHRASE');
+            reason: 'Each DATE in dual-invalid should have a PHRASE',);
       }
 
       // v7 dual dates are converted: "1701/99" -> "BET 1701 AND 1799"
@@ -325,7 +321,7 @@ void main() {
       // "JAN 1699" is a simple month+year -> parseable
       final secondDate = births[1].children.whereType<DateElement>().first;
       expect(secondDate.value, 'JAN 1699');
-      expect(secondDate.date, DateTime(1699, 1));
+      expect(secondDate.date, DateTime(1699));
     });
 
     test('parses enum-ext.ged', () {
@@ -401,15 +397,13 @@ void main() {
       expect(submLangs[2].value, 'es');
 
       // _ALL_LANGUAGES has many LANG entries
-      final allLangs =
-          root.children.firstWhere((e) => e.pointer == '@2@');
+      final allLangs = root.children.firstWhere((e) => e.pointer == '@2@');
       final langEntries =
           allLangs.children.where((e) => e.tag == 'LANG').toList();
       expect(langEntries.length, greaterThan(70));
 
       // _PHON_ROMN_PAYLOADS has LANG with PHRASE substructures
-      final phonRomn =
-          root.children.firstWhere((e) => e.pointer == '@4@');
+      final phonRomn = root.children.firstWhere((e) => e.pointer == '@4@');
       final phonLangs =
           phonRomn.children.where((e) => e.tag == 'LANG').toList();
       expect(phonLangs.length, 2);
@@ -460,8 +454,7 @@ void main() {
       expect(date3.date, DateTime(2021, 5, 25));
 
       // Cyclic SNOTE @5@ references SOUR @2@
-      final cyclicSour =
-          snotes[2].children.firstWhere((e) => e.tag == 'SOUR');
+      final cyclicSour = snotes[2].children.firstWhere((e) => e.tag == 'SOUR');
       expect(cyclicSour.value, '@2@');
     });
 
@@ -594,20 +587,17 @@ void main() {
       // INDI @1@ references sources
       final indi = root.children.whereType<IndividualElement>().first;
       expect(indi.pointer, '@1@');
-      final indiSources =
-          indi.children.where((e) => e.tag == 'SOUR').toList();
+      final indiSources = indi.children.where((e) => e.tag == 'SOUR').toList();
       expect(indiSources.length, 3);
       expect(indiSources[0].value, '@X1@');
       expect(indiSources[1].value, '@X2@');
       expect(indiSources[2].value, '@2@');
 
       // First SOUR citation has DATA with TEXT and QUAY
-      final data0 =
-          indiSources[0].children.firstWhere((e) => e.tag == 'DATA');
+      final data0 = indiSources[0].children.firstWhere((e) => e.tag == 'DATA');
       final texts = data0.children.where((e) => e.tag == 'TEXT').toList();
       expect(texts.length, greaterThanOrEqualTo(1));
-      final quay =
-          indiSources[0].children.firstWhere((e) => e.tag == 'QUAY');
+      final quay = indiSources[0].children.firstWhere((e) => e.tag == 'QUAY');
       expect(quay.value, '1');
 
       // Shared SOUR @2@ has AUTH, TITL, TEXT, CHAN

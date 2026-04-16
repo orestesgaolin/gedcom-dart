@@ -90,4 +90,3 @@ class GedcomParser {
     return '5.5.1';
   }
 }
-

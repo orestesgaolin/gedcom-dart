@@ -108,8 +108,7 @@ void main() {
       // In v5, AGE values are kept as-is (not normalized like v7)
       final firstEvent = events.first;
       expect(firstEvent.value, 'when 0');
-      final firstAge =
-          firstEvent.children.firstWhere((e) => e.tag == 'AGE');
+      final firstAge = firstEvent.children.firstWhere((e) => e.tag == 'AGE');
       expect(firstAge.value, '0');
     });
 
@@ -124,10 +123,8 @@ void main() {
       expect(events.length, greaterThan(30));
 
       // In v5, AGE uses keyword values directly (child, infant, stillborn)
-      final childEvent =
-          events.firstWhere((e) => e.value == 'when child');
-      final childAge =
-          childEvent.children.firstWhere((e) => e.tag == 'AGE');
+      final childEvent = events.firstWhere((e) => e.value == 'when child');
+      final childAge = childEvent.children.firstWhere((e) => e.tag == 'AGE');
       expect(childAge.value, 'child');
 
       final stillbornEvent =
@@ -284,25 +281,22 @@ void main() {
 
       // Each BIRT should have NOTE and DATE
       for (final birth in births) {
-        final dateElements =
-            birth.children.whereType<DateElement>().toList();
+        final dateElements = birth.children.whereType<DateElement>().toList();
         expect(dateElements.length, 1,
-            reason: 'Each BIRT should have one DATE');
+            reason: 'Each BIRT should have one DATE',);
         final noteElements =
             birth.children.where((e) => e.tag == 'NOTE').toList();
         expect(noteElements.length, 1,
-            reason: 'Each BIRT should have one NOTE');
+            reason: 'Each BIRT should have one NOTE',);
       }
 
       // v5 keeps dual dates as-is: "1701/99" -> not parseable
-      final firstDate =
-          births.first.children.whereType<DateElement>().first;
+      final firstDate = births.first.children.whereType<DateElement>().first;
       expect(firstDate.value, '1701/99');
       expect(firstDate.date, isNull);
 
       // "JAN 1701/99" has extra tokens -> not parseable
-      final secondDate =
-          births[1].children.whereType<DateElement>().first;
+      final secondDate = births[1].children.whereType<DateElement>().first;
       expect(secondDate.value, 'JAN 1701/99');
       expect(secondDate.date, isNull);
     });
@@ -318,14 +312,12 @@ void main() {
       expect(births.length, 11);
 
       // Dual year dates in v5 are not parseable
-      final firstDate =
-          births.first.children.whereType<DateElement>().first;
+      final firstDate = births.first.children.whereType<DateElement>().first;
       expect(firstDate.value, '1699/00');
       expect(firstDate.date, isNull);
 
       // "JAN 1699/00" -> not parseable due to extra /00
-      final secondDate =
-          births[1].children.whereType<DateElement>().first;
+      final secondDate = births[1].children.whereType<DateElement>().first;
       expect(secondDate.value, 'JAN 1699/00');
       expect(secondDate.date, isNull);
     });
@@ -406,15 +398,13 @@ void main() {
       expect(submLangs[2].value, 'Spanish');
 
       // _ALL_LANGUAGES has many LANG entries
-      final allLangs =
-          root.children.firstWhere((e) => e.pointer == '@2@');
+      final allLangs = root.children.firstWhere((e) => e.pointer == '@2@');
       final langEntries =
           allLangs.children.where((e) => e.tag == 'LANG').toList();
       expect(langEntries.length, greaterThan(70));
 
       // _WRONG_CASE tests case sensitivity
-      final wrongCase =
-          root.children.firstWhere((e) => e.pointer == '@3@');
+      final wrongCase = root.children.firstWhere((e) => e.pointer == '@3@');
       final wrongCaseLangs =
           wrongCase.children.where((e) => e.tag == 'LANG').toList();
       expect(wrongCaseLangs.length, 2);
@@ -422,10 +412,8 @@ void main() {
       expect(wrongCaseLangs[1].value, 'ENGlish');
 
       // _LANGUAGE_NOT_IN_551 tests non-standard language
-      final nonStd =
-          root.children.firstWhere((e) => e.pointer == '@5@');
-      final hmong =
-          nonStd.children.firstWhere((e) => e.tag == 'LANG');
+      final nonStd = root.children.firstWhere((e) => e.pointer == '@5@');
+      final hmong = nonStd.children.firstWhere((e) => e.tag == 'LANG');
       expect(hmong.value, 'Hmong');
     });
 
@@ -454,9 +442,8 @@ void main() {
       expect(sourNotes[2].value, '@5@');
 
       // Shared NOTE records (v5 uses NOTE instead of SNOTE)
-      final noteRecords = root.children
-          .where((e) => e.tag == 'NOTE' && e.level == 0)
-          .toList();
+      final noteRecords =
+          root.children.where((e) => e.tag == 'NOTE' && e.level == 0).toList();
       expect(noteRecords.length, 3);
       expect(noteRecords[0].pointer, '@3@');
       expect(noteRecords[0].value, 'A single-use note record');
@@ -606,8 +593,7 @@ void main() {
       // INDI @1@ has inline and linked SOUR references
       final indi = root.children.whereType<IndividualElement>().first;
       expect(indi.pointer, '@1@');
-      final indiSources =
-          indi.children.where((e) => e.tag == 'SOUR').toList();
+      final indiSources = indi.children.where((e) => e.tag == 'SOUR').toList();
       expect(indiSources.length, 3);
 
       // In v5, inline SOUR has text value directly
@@ -625,8 +611,7 @@ void main() {
       final texts0 =
           indiSources[0].children.where((e) => e.tag == 'TEXT').toList();
       expect(texts0.length, greaterThanOrEqualTo(1));
-      final quay0 =
-          indiSources[0].children.firstWhere((e) => e.tag == 'QUAY');
+      final quay0 = indiSources[0].children.firstWhere((e) => e.tag == 'QUAY');
       expect(quay0.value, '1');
 
       // Shared SOUR @2@ has AUTH, TITL, TEXT, CHAN
@@ -670,9 +655,8 @@ void main() {
       expect(noteRefs[1].value, '@NoTe ref@');
 
       // NOTE records with mixed-case pointers
-      final noteRecords = root.children
-          .where((e) => e.tag == 'NOTE' && e.level == 0)
-          .toList();
+      final noteRecords =
+          root.children.where((e) => e.tag == 'NOTE' && e.level == 0).toList();
       expect(noteRecords.length, 2);
       expect(noteRecords[0].pointer, '@NoTe@');
       expect(noteRecords[0].value, 'mixed case');
