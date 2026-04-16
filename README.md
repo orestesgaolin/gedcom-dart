@@ -18,6 +18,59 @@ Key differences between GEDCOM 5.5 and 7.0 handled by this library:
 - **Extensions**: GEDCOM 7.0 supports `SCHMA` in the header for defining custom tags
 - **Character encoding**: GEDCOM 7.0 defaults to UTF-8; the `CHAR` tag from 5.5 is removed
 
+## Mermaid rendering
+
+Any parsed tree can be rendered to a [Mermaid](https://mermaid.js.org/) `flowchart` diagram via `GedcomMermaidRenderer`. Individuals become labeled nodes (name plus birth/death years when available), families become union nodes, and edges connect spouses to their family and families to their children.
+
+```dart
+import 'package:gedcom/gedcom.dart';
+
+final root = GedcomParser().parse(gedcomString);
+final diagram = const GedcomMermaidRenderer().render(root);
+print(diagram);
+// flowchart TD
+//   I1["John Doe<br/>1900–1970"]
+//   I2["Jane Smith<br/>1905–"]
+//   I3["Alice Doe<br/>1930–"]
+//   F1{{"@F1@"}}
+//   I1 --- F1
+//   I2 --- F1
+//   F1 --> I3
+```
+
+The renderer accepts `direction` (`MermaidDirection.topDown` / `leftRight` / `bottomUp` / `rightLeft`), `familyShape` (`MermaidFamilyShape.hexagon` / `circle` / `rectangle`), and `includeDates` to control the output.
+
+## CLI
+
+The package ships with a `gedcom_to_mermaid` executable that reads a GEDCOM file (or stdin) and writes the Mermaid diagram to stdout or a file.
+
+```sh
+# Run directly from a checkout
+dart run bin/gedcom_to_mermaid.dart path/to/tree.ged
+
+# Or activate it globally
+dart pub global activate gedcom
+gedcom_to_mermaid path/to/tree.ged -o tree.mmd
+```
+
+Options:
+
+| Flag | Description |
+| --- | --- |
+| `-o, --output <path>` | Write output to `<path>` instead of stdout. |
+| `-d, --direction <dir>` | Flowchart direction: `TD` (default), `LR`, `BT`, `RL`. |
+| `-s, --shape <shape>` | Family node shape: `hexagon` (default), `circle`, `rectangle`. |
+| `--no-dates` | Omit birth/death years from individual labels. |
+| `-h, --help` | Show usage. |
+
+Piping works too:
+
+```sh
+cat tree.ged | dart run bin/gedcom_to_mermaid.dart -d LR > tree.mmd
+```
+
+See [EXAMPLE_HARRY_POTTER.md](EXAMPLE_HARRY_POTTER.md) for a rendered Mermaid diagram of the Harry Potter family tree sample.
+
 # Warning
 
 The package is still in development. Only selected features are supported.

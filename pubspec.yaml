@@ -1,7 +1,7 @@
 name: gedcom
 description: Dart library to parse GEDCOM data from string input ported from
   popular Python library
-version: 0.3.0
+version: 0.4.0
 repository: https://github.com/orestesgaolin/gedcom-dart
 topics: 
   - genealogy
@@ -11,6 +11,9 @@ topics:
 
 environment:
   sdk: ">=3.2.6 <4.0.0"
+
+executables:
+  gedcom_to_mermaid:
 
 dependencies:
   collection: ^1.15.0
