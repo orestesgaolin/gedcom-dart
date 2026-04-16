@@ -2,21 +2,18 @@ name: Dart CI
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
   pull_request:
-    branches: [master]
+    branches: [ master ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    container:
-      image: google/dart:latest
-
     steps:
       - uses: actions/checkout@v2
-        with:
-          submodules: 'recursive'      
+
+      - uses: dart-lang/setup-dart@v1
 
       - name: Install Dependencies
         run: pub get
@@ -28,4 +25,6 @@ jobs:
         run: dartanalyzer --fatal-infos --fatal-warnings lib
 
       - name: Run tests
-        run: dart test --coverage=coverage && pub run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --packages=.packages --report-on=lib
+        run: dart test --coverage=coverage && pub run coverage:format_coverage --lcov
+          --in=coverage --out=coverage/lcov.info --packages=.packages
+          --report-on=lib
