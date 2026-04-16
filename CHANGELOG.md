@@ -1,3 +1,8 @@
+## 0.4.0
+
+- add mermaid rendering support
+- add CLI executable to convert GEDCOM files to Mermaid diagrams
+
 ## 0.3.0
 
 - add support for GEDCOM 7.0
