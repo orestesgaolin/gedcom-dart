@@ -1,13 +1,18 @@
-## [0.2.0]
+## 0.3.0
+
+- add support for GEDCOM 7.0
+- update dependencies
+
+## 0.2.0
 
 - update dependencies, min Dart SDK is now 3.2.6
 - fix handling of the DATE attribute via [#6](https://github.com/orestesgaolin/gedcom-dart/pull/6) by [@romanbsd](https://github.com/romanbsd)
 
-## [0.1.0] - Migrate to nnbd
+## 0.1.0 - Migrate to nnbd
 
 - migrate to null safety and update dependencies
 
-## [0.0.3] - More features
+## 0.0.3 - More features
 
 ### Features
 
@@ -16,10 +21,10 @@
 - add getAllFamilies ([4874dbe](https://github.com/orestesgaolin/gedcom-dart/commit/4874dbe79811871640043ee95e10679f195b5d22))
 - add helper methods to family element ([cfaa678](https://github.com/orestesgaolin/gedcom-dart/commit/cfaa678b7ceba36d5f392290a97aa576fe98d1e2))
 
-## [0.0.2] - Updates
+## 0.0.2 - Updates
 
 - add getElementsList, getElementsMap, getFamilies
 
-## [0.0.1] - Initial release
+## 0.0.1 - Initial release
 
 - Basic initial release with just a simple `parse` method

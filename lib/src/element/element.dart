@@ -40,6 +40,7 @@ part 'individual.dart';
 part 'name.dart';
 part 'object.dart';
 part 'root.dart';
+part 'source.dart';
 part 'tags.dart';
 
 /// Base GEDCOM element

@@ -1,0 +1,206 @@
+﻿0 HEAD
+1 GEDC
+2 VERS 7.0
+1 NOTE This file is intended to provide coverage of parts of the specification and does not contain meaningful historical or genealogical data.
+0 @I1@ INDI
+1 NOTE There are many ways to express an age of "zero".
+1 CHR
+2 AGE 0y
+1 CHR
+2 AGE < 0y
+1 CHR
+2 AGE 0m
+1 CHR
+2 AGE < 0m
+1 CHR
+2 AGE 0w
+1 CHR
+2 AGE < 0w
+1 CHR
+2 AGE 0d
+1 CHR
+2 AGE < 0d
+1 CHR
+2 AGE 0y 0m
+1 CHR
+2 AGE < 0y 0m
+1 CHR
+2 AGE 0y 0w
+1 CHR
+2 AGE < 0y 0w
+1 CHR
+2 AGE 0y 0d
+1 CHR
+2 AGE < 0y 0d
+1 CHR
+2 AGE 0m 0w
+1 CHR
+2 AGE < 0m 0w
+1 CHR
+2 AGE 0m 0d
+1 CHR
+2 AGE < 0m 0d
+1 CHR
+2 AGE 0w 0d
+1 CHR
+2 AGE < 0w 0d
+1 CHR
+2 AGE 0y 0m 0w
+1 CHR
+2 AGE < 0y 0m 0w
+1 CHR
+2 AGE 0y 0m 0d
+1 CHR
+2 AGE < 0y 0m 0d
+1 CHR
+2 AGE 0y 0w 0d
+1 CHR
+2 AGE < 0y 0w 0d
+1 CHR
+2 AGE 0m 0w 0d
+1 CHR
+2 AGE < 0m 0w 0d
+1 CHR
+2 AGE 0y 0m 0w 0d
+1 CHR
+2 AGE < 0y 0m 0w 0d
+1 CHR
+2 AGE
+3 PHRASE Zero
+1 NOTE Various combinations of non-zero ages and age ranges.
+1 CHR
+2 AGE > 0y
+1 CHR
+2 AGE 99y
+1 CHR
+2 AGE > 99y
+1 CHR
+2 AGE < 99y
+1 CHR
+2 AGE > 0m
+1 CHR
+2 AGE 11m
+1 CHR
+2 AGE > 11m
+1 CHR
+2 AGE < 11m
+1 CHR
+2 AGE > 0w
+1 CHR
+2 AGE 3w
+1 CHR
+2 AGE > 3w
+1 CHR
+2 AGE < 3w
+1 CHR
+2 AGE > 0d
+1 CHR
+2 AGE 6d
+1 CHR
+2 AGE > 6d
+1 CHR
+2 AGE < 6d
+1 CHR
+2 AGE > 0y 0m
+1 CHR
+2 AGE 99y 11m
+1 CHR
+2 AGE > 99y 11m
+1 CHR
+2 AGE < 99y 11m
+1 CHR
+2 AGE > 0y 0w
+1 CHR
+2 AGE 99y 3w
+1 CHR
+2 AGE > 99y 3w
+1 CHR
+2 AGE < 99y 3w
+1 CHR
+2 AGE > 0y 0d
+1 CHR
+2 AGE 99y 6d
+1 CHR
+2 AGE > 99y 6d
+1 CHR
+2 AGE < 99y 6d
+1 CHR
+2 AGE > 0m 0w
+1 CHR
+2 AGE 11m 3w
+1 CHR
+2 AGE > 11m 3w
+1 CHR
+2 AGE < 11m 3w
+1 CHR
+2 AGE > 0m 0d
+1 CHR
+2 AGE 11m 6d
+1 CHR
+2 AGE > 11m 6d
+1 CHR
+2 AGE < 11m 6d
+1 CHR
+2 AGE > 0w 0d
+1 CHR
+2 AGE 3w 6d
+1 CHR
+2 AGE > 3w 6d
+1 CHR
+2 AGE < 3w 6d
+1 CHR
+2 AGE > 0y 0m 0w
+1 CHR
+2 AGE 99y 11m 3w
+1 CHR
+2 AGE > 99y 11m 3w
+1 CHR
+2 AGE < 99y 11m 3w
+1 CHR
+2 AGE > 0y 0m 0d
+1 CHR
+2 AGE 99y 11m 6d
+1 CHR
+2 AGE > 99y 11m 6d
+1 CHR
+2 AGE < 99y 11m 6d
+1 CHR
+2 AGE > 0y 0w 0d
+1 CHR
+2 AGE 99y 3w 6d
+1 CHR
+2 AGE > 99y 3w 6d
+1 CHR
+2 AGE < 99y 3w 6d
+1 CHR
+2 AGE > 0m 0w 0d
+1 CHR
+2 AGE 99m 3w 6d
+1 CHR
+2 AGE > 99m 3w 6d
+1 CHR
+2 AGE < 99m 3w 6d
+1 CHR
+2 AGE > 0y 0m 0w 0d
+1 CHR
+2 AGE 99y 11m 3w 6d
+1 CHR
+2 AGE > 99y 11m 3w 6d
+1 CHR
+2 AGE < 99y 11m 3w 6d
+1 NOTE Age payloads do not have range restrictions.
+1 CHR
+2 AGE 1y 30m
+1 CHR
+2 AGE 1y 100w
+1 CHR
+2 AGE 1y 400d
+1 CHR
+2 AGE 1m 40d
+1 CHR
+2 AGE 1m 10w
+1 CHR
+2 AGE 1w 30d
+1 CHR
+2 AGE 1y 30m 100w 400d
+0 TRLR

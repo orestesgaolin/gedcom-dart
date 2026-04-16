@@ -27,8 +27,8 @@
 
 import 'package:gedcom/src/element/element.dart';
 
-/// Class responsible for parsing GEDCOM data
-class Gedcom5Parser {
+/// Class responsible for parsing GEDCOM 7.0 data
+class Gedcom7Parser {
   final RootElement _root = RootElement();
 
   /// Parses the string input consisting of GEDCOM
@@ -135,8 +135,8 @@ class Gedcom5Parser {
     if (match == null) {
       if (strict == true) {
         throw Exception(
-            'Line $lineNumber $line of document violates GEDCOM format 5.5 '
-            'See: https://chronoplexsoftware.com/gedcomvalidator/gedcom/gedcom-5.5.pdf');
+          'Line $lineNumber $line of document violates GEDCOM format 7.0',
+        );
       } else {
         //TODO: handle non-strict case as https://github.com/nickreynke/python-gedcom/blob/master/gedcom/parser.py
         throw UnimplementedError();
@@ -150,8 +150,8 @@ class Gedcom5Parser {
 
       if (level > lastElement.level + 1) {
         throw Exception('Line $lineNumber of document violates GEDCOM '
-            'format 5.5. Lines must be no more than one level higher than '
-            'previous line. See https://chronoplexsoftware.com/gedcomvalidator/gedcom/gedcom-5.5.pdf');
+            'format 7.0. Lines must be no more than one level higher than '
+            'previous line.');
       }
       GedcomElement element;
       if (tag == GEDCOM_TAG_FAMILY) {
@@ -203,6 +203,13 @@ class Gedcom5Parser {
           value: value,
           crlf: crlf,
         );
+      } else if (tag == GEDCOM_TAG_SOURCE) {
+        element = SourceElement(
+          level: level,
+          pointer: pointer,
+          value: value,
+          crlf: crlf,
+        );
       } else {
         element = GedcomElement(
           level: level,
@@ -229,4 +236,4 @@ class Gedcom5Parser {
 /// Tag must be an alphanumeric string.
 /// Value optional, consists of anything after a space to end of line.
 /// End of line defined by `\n` or `\r`.
-const _lineRe = r'\s*(0|[1-9]+[0-9]*) (@[^@]+@ |)([A-Za-z0-9_]+)( [^\n\r]*|)';
+const _lineRe = r'\s*(0|[1-9][0-9]*) (@[^@]+@ |)([A-Za-z0-9_]+)( [^\n\r]*|)';

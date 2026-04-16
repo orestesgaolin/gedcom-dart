@@ -1,0 +1,164 @@
+0 HEAD
+1 GEDC
+2 VERS 7.0
+1 NOTE This file is intended to provide coverage of parts of the specification and does not contain meaningful historical or genealogical data.
+0 @F1@ FAM
+1 NCHI 2
+2 TYPE Type of children
+1 RESI Residence
+2 TYPE Type of residence
+1 FACT Fact
+2 TYPE Type of fact
+1 ANUL Y
+1 CENS Y
+1 DIV Y
+1 DIVF Y
+1 ENGA Y
+1 MARB Y
+1 MARC Y
+1 MARL Y
+1 MARS Y
+1 MARR Y
+2 DATE 27 MAR 2022
+2 PLAC Place
+2 SOUR @S1@
+3 PAGE 1
+2 SOUR @S1@
+3 PAGE 2
+1 EVEN Event
+2 TYPE Event type
+1 HUSB @I1@
+1 WIFE @I2@
+1 CHIL @I4@
+1 CHIL @VOID@
+0 @F2@ FAM
+1 MARR
+2 DATE 1998
+1 CHIL @I1@
+0 @I1@ INDI
+1 NAME Lt. Cmndr. Joseph "John" /de Allen/ jr.
+2 SOUR @S1@
+3 PAGE 1
+2 SOUR @S2@
+1 NAME John /Doe/
+2 TYPE BIRTH
+1 NAME Aka
+2 TYPE AKA
+1 NAME Immigrant Name
+2 TYPE IMMIGRANT
+1 SEX M
+1 CAST Caste
+2 TYPE Caste type
+1 DSCR Description
+2 TYPE Description type
+2 SOUR @VOID@
+3 PAGE Entire source
+1 EDUC Education
+2 TYPE Education type
+1 IDNO ID number
+2 TYPE ID number type
+1 NATI Nationality
+2 TYPE Nationality type
+1 NCHI 2
+2 TYPE nchi type
+1 NMR 2
+2 TYPE nmr type
+1 OCCU occu
+2 TYPE occu type
+1 PROP prop
+2 TYPE prop type
+1 RELI reli
+2 TYPE reli type
+1 RESI resi
+2 TYPE resi type
+1 SSN ssn
+2 TYPE ssn type
+1 TITL titl
+2 TYPE titl type
+1 FACT fact
+2 TYPE fact type
+1 BAPM
+2 TYPE bapm type
+1 BAPM Y
+1 BARM
+2 TYPE barm type
+1 BASM
+2 TYPE basm type
+1 BLES
+2 TYPE bles type
+1 BURI
+2 TYPE buri type
+2 DATE 30 MAR 2022
+1 CENS
+2 TYPE cens type
+1 CHRA
+2 TYPE chra type
+1 CONF
+2 TYPE conf type
+1 CREM
+2 TYPE crem type
+1 DEAT
+2 TYPE deat type
+2 DATE 28 MAR 2022
+2 PLAC Somewhere
+2 NOTE Note text
+2 SOUR @S1@
+3 PAGE 1
+2 SOUR @S2@
+3 PAGE 2
+1 EMIG
+2 TYPE emig type
+1 FCOM
+2 TYPE fcom type
+1 GRAD
+2 TYPE grad type
+1 IMMI
+2 TYPE immi type
+1 NATU
+2 TYPE natu type
+1 ORDN
+2 TYPE ordn type
+1 PROB
+2 TYPE prob type
+1 RETI
+2 TYPE reti type
+1 WILL
+2 TYPE will type
+1 ADOP
+2 TYPE adop type
+1 BIRT
+2 TYPE birth type
+2 DATE 1 JAN 2000
+1 CHR
+2 TYPE chr type
+2 DATE 9 JAN 2000
+1 EVEN Event
+2 TYPE Event type
+1 FAMC @F2@
+1 FAMS @VOID@
+1 FAMS @F1@
+1 SOUR @S1@
+2 PAGE 1
+1 SOUR @S2@
+0 @I2@ INDI
+1 NAME Maiden Name
+2 TYPE MAIDEN
+1 NAME Married Name
+2 TYPE MARRIED
+1 NAME Professional Name
+2 TYPE PROFESSIONAL
+1 SEX F
+1 FAMS @F1@
+0 @I3@ INDI
+1 SEX X
+0 @I4@ INDI
+1 SEX U
+1 FAMC @F1@
+0 @S1@ SOUR
+1 AUTH Author
+1 TITL Title
+1 ABBR Abbreviation
+1 PUBL Publication info
+0 @S2@ SOUR
+1 TITL Source Two
+0 TRLR

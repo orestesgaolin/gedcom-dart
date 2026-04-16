@@ -25,6 +25,39 @@
 // along with this program; if not, write to the Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+import 'package:gedcom/src/element/element.dart';
+import 'package:gedcom/src/gedcom.dart';
+import 'package:gedcom/src/gedcom7.dart';
 
 export 'src/element/element.dart';
-export 'src/gedcom.dart';
+export 'src/gedcom.dart' show Gedcom5Parser;
+export 'src/gedcom7.dart' show Gedcom7Parser;
+
+class GedcomParser {
+  RootElement parse(String data, {bool strict = true}) {
+    final version = _detectVersion(data);
+    if (version.startsWith('7.')) {
+      return Gedcom7Parser().parse(data, strict: strict);
+    } else {
+      return Gedcom5Parser().parse(data, strict: strict);
+    }
+  }
+
+  String _detectVersion(String data) {
+    final lines = data.split('\n');
+    for (var i = 0; i < lines.length; i++) {
+      final line = lines[i];
+      if (line.trimLeft().startsWith('1 GEDC')) {
+        final nextLineIndex = i + 1;
+        if (nextLineIndex < lines.length) {
+          final nextLine = lines[nextLineIndex].trim();
+          if (nextLine.startsWith('2 VERS')) {
+            return nextLine.substring(7);
+          }
+        }
+      }
+    }
+    // Default to 5.5.1 if no version is found
+    return '5.5.1';
+  }
+}

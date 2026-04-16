@@ -2,10 +2,21 @@
 
 Port of [python-gedcom](https://github.com/nickreynke/python-gedcom) library to Dart.
 
-GEDCOM files contain ancestry data. The parser is currently supporting the GEDCOM 5.5 format.
+GEDCOM files contain ancestry data. The parser supports both **GEDCOM 5.5/5.5.1** and **GEDCOM 7.0** formats.
 
-> [!NOTE]  
-> Looking for contributors to implement [support for GEDCOM 7.0](https://github.com/orestesgaolin/gedcom-dart/issues/5).
+## GEDCOM version support
+
+`GedcomParser` automatically detects the version from the `HEAD.GEDC.VERS` tag and delegates to the appropriate parser (`Gedcom5Parser` or `Gedcom7Parser`). You can also use `Gedcom5Parser` or `Gedcom7Parser` directly if needed.
+
+Key differences between GEDCOM 5.5 and 7.0 handled by this library:
+
+- **Sources**: GEDCOM 7.0 parses `SOUR` records as `SourceElement` (with proper type preservation via `copyWith`)
+- **Shared notes**: GEDCOM 7.0 uses `SNOTE` for shared note records (5.5 uses `NOTE`)
+- **Relationships**: GEDCOM 7.0 uses `ROLE` with `PHRASE` substructures (5.5 uses `RELA`)
+- **Languages**: GEDCOM 7.0 uses BCP 47 language tags like `en`, `ja` (5.5 uses full names like `English`, `Japanese`)
+- **Dates**: GEDCOM 7.0 normalizes dual-year dates (e.g. `1701/99` becomes `BET 1701 AND 1799` with a `PHRASE`)
+- **Extensions**: GEDCOM 7.0 supports `SCHMA` in the header for defining custom tags
+- **Character encoding**: GEDCOM 7.0 defaults to UTF-8; the `CHAR` tag from 5.5 is removed
 
 # Warning
 
