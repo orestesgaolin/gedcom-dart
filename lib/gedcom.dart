@@ -74,13 +74,14 @@ class GedcomParser {
 
   String _detectVersion(String data) {
     final lines = data.split('\n');
-    for (final line in lines) {
-      if (line.startsWith('1 GEDC')) {
-        final nextLineIndex = lines.indexOf(line) + 1;
+    for (var i = 0; i < lines.length; i++) {
+      final line = lines[i];
+      if (line.trimLeft().startsWith('1 GEDC')) {
+        final nextLineIndex = i + 1;
         if (nextLineIndex < lines.length) {
-          final nextLine = lines[nextLineIndex];
-          if (nextLine.trim().startsWith('2 VERS')) {
-            return nextLine.trim().substring(7);
+          final nextLine = lines[nextLineIndex].trim();
+          if (nextLine.startsWith('2 VERS')) {
+            return nextLine.substring(7);
           }
         }
       }
