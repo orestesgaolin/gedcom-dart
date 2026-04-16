@@ -32,8 +32,6 @@ import 'package:gedcom/src/gedcom7.dart';
 export 'src/element/element.dart';
 export 'src/gedcom.dart' show Gedcom5Parser;
 export 'src/gedcom7.dart' show Gedcom7Parser;
-export 'src/mermaid.dart'
-    show GedcomMermaidRenderer, MermaidDirection, MermaidFamilyShape;
 
 class GedcomParser {
   RootElement parse(String data, {bool strict = true}) {
