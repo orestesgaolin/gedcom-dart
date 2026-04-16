@@ -1,0 +1,6 @@
+[submodule "test/samples/gedcom-samples"]
+	path = test/samples/gedcom-samples
+	url = git@github.com:findmypast/gedcom-samples.git
+[submodule "test/samples/test-files"]
+	path = test/samples/test-files
+	url = git@github.com:gedcom7code/test-files.git

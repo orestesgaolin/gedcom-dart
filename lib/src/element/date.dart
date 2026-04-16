@@ -30,14 +30,18 @@ class DateElement extends GedcomElement {
           }
         }
       } else if (values.length == 2) {
-        final month = months[values[0]]!;
-        final year = int.tryParse(values[1])!;
-        return DateTime(year, month);
+        final month = months[values[0]];
+        final year = int.tryParse(values[1]);
+        if (month != null && year != null) {
+          return DateTime(year, month);
+        }
       } else if (values.length == 3) {
-        final day = int.tryParse(values[0])!;
-        final month = months[values[1]]!;
-        final year = int.tryParse(values[2])!;
-        return DateTime(year, month, day);
+        final day = int.tryParse(values[0]);
+        final month = months[values[1]];
+        final year = int.tryParse(values[2]);
+        if (day != null && month != null && year != null) {
+          return DateTime(year, month, day);
+        }
       }
     }
     return null;
