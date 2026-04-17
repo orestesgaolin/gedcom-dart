@@ -1,6 +1,6 @@
 part of 'element.dart';
 
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, reason: GEDCOM tags are standardized uppercase constants.
 /// GEDCOM tags.
 /// Ported from https://github.com/nickreynke/python-gedcom/blob/master/gedcom/tags.py
 
@@ -62,11 +62,7 @@ const GEDCOM_TAG_DEATH = 'DEAT';
 /// - [spouse] corresponds to [GEDCOM_TAG_FAMILY_SPOUSE],
 /// - [child] corresponds to [GEDCOM_TAG_FAMILY_CHILD],
 /// - [other] corresponds to [GEDCOM_TAG_FAMILY]
-enum FamilyRelation {
-  spouse,
-  child,
-  other,
-}
+enum FamilyRelation { spouse, child, other }
 
 /// Identifies a legal, common law, or other customary relationship
 /// of man and woman and their children, if any, or a family created

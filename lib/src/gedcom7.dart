@@ -133,7 +133,7 @@ class Gedcom7Parser {
     final match = RegExp(_lineRe).firstMatch(line);
 
     if (match == null) {
-      if (strict == true) {
+      if (strict) {
         throw Exception(
           'Line $lineNumber $line of document violates GEDCOM format 7.0',
         );
@@ -149,9 +149,11 @@ class Gedcom7Parser {
       final crlf = match.groupCount > 4 ? match.group(5)!.trim() : '\n';
 
       if (level > lastElement.level + 1) {
-        throw Exception('Line $lineNumber of document violates GEDCOM '
-            'format 7.0. Lines must be no more than one level higher than '
-            'previous line.');
+        throw Exception(
+          'Line $lineNumber of document violates GEDCOM '
+          'format 7.0. Lines must be no more than one level higher than '
+          'previous line.',
+        );
       }
       GedcomElement element;
       if (tag == GEDCOM_TAG_FAMILY) {
