@@ -1,6 +1,7 @@
 part of 'element.dart';
 
-// ignore_for_file: constant_identifier_names, GEDCOM tags are standardized uppercase constants.
+// GEDCOM tags are standardized uppercase constants.
+// ignore_for_file: constant_identifier_names
 /// GEDCOM tags.
 /// Ported from https://github.com/nickreynke/python-gedcom/blob/master/gedcom/tags.py
 
