@@ -133,10 +133,11 @@ class Gedcom5Parser {
     final match = RegExp(_lineRe).firstMatch(line);
 
     if (match == null) {
-      if (strict == true) {
+      if (strict) {
         throw Exception(
-            'Line $lineNumber $line of document violates GEDCOM format 5.5 '
-            'See: https://chronoplexsoftware.com/gedcomvalidator/gedcom/gedcom-5.5.pdf');
+          'Line $lineNumber $line of document violates GEDCOM format 5.5 '
+          'See: https://chronoplexsoftware.com/gedcomvalidator/gedcom/gedcom-5.5.pdf',
+        );
       } else {
         //TODO: handle non-strict case as https://github.com/nickreynke/python-gedcom/blob/master/gedcom/parser.py
         throw UnimplementedError();
@@ -149,9 +150,11 @@ class Gedcom5Parser {
       final crlf = match.groupCount > 4 ? match.group(5)!.trim() : '\n';
 
       if (level > lastElement.level + 1) {
-        throw Exception('Line $lineNumber of document violates GEDCOM '
-            'format 5.5. Lines must be no more than one level higher than '
-            'previous line. See https://chronoplexsoftware.com/gedcomvalidator/gedcom/gedcom-5.5.pdf');
+        throw Exception(
+          'Line $lineNumber of document violates GEDCOM '
+          'format 5.5. Lines must be no more than one level higher than '
+          'previous line. See https://chronoplexsoftware.com/gedcomvalidator/gedcom/gedcom-5.5.pdf',
+        );
       }
       GedcomElement element;
       if (tag == GEDCOM_TAG_FAMILY) {
